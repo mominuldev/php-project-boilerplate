@@ -12,7 +12,7 @@ $db = new Database($config['database']);
 $note = $db->query('select * from notes where id = :id', [ 'id' => $id])->fetch();
 
 if (!$note) {
-    abort(404);
+    abort();
 }
 
 if ($note['user_id'] === $cureentUser) {
