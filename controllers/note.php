@@ -1,5 +1,6 @@
 <?php
 
+
 $heading = "Note Details";
 $title = "Note";
 $id = $_GET['id'] ?? null;
@@ -9,15 +10,11 @@ $config = require 'config.php';
 $db = new Database($config['database']);
 
 
-$note = $db->query('select * from notes where id = :id', [ 'id' => $id])->fetch();
+$note = $db->query('select * from notes where id = :id', [ 'id' => $id])->findOrFail();
 
-if (!$note) {
-    abort();
-}
 
-if ($note['user_id'] === $cureentUser) {
-    abort(Response::NOTAUTHORISED);
-}
+authorize($note['user_id'] == $cureentUser);
+
 
 
 require 'views/note.view.php';

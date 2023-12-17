@@ -2,5 +2,5 @@
 
 class Response {
 
-    const NOTAUTHORISED = 403;
+    const FORBIDDEN = 403;
 }
